@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import "../styles/array.css";
 import { startBubble } from "../components/bubble";
+import { setWidth } from "../components/width";
 
 function Application() {
 
@@ -14,7 +15,7 @@ function Application() {
     const generateArr= () => {
         let tempArr= [];
 
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 10; i++) {
             tempArr.push(randomInt(25, 1000));
         }
         setArray(tempArr);
@@ -23,12 +24,8 @@ function Application() {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
-    const setWidth= (num) => {
-        return (Math.floor(num / 25)) + 50;
-    }
-
     const bubbleSort= () => {
-        startBubble();
+        startBubble(array);
     }
 
     let unsorted = array.map((element, index) => {
