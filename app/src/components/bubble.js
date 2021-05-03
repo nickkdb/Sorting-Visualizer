@@ -1,4 +1,4 @@
-import { setWidth } from "./width";
+import { setWidth } from "../utils/width";
 
 const SPEED= 5;
 let lastRender;
