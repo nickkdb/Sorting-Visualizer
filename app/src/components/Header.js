@@ -28,7 +28,7 @@ function Header(props) {
                   </Col>
                   <Col xl={4} style={{display: "grid", gridTemplateColumns: "repeat(3, 1fr)"}}>
             <Nav.Link style={algoStyle}>Merge Sort</Nav.Link>
-            <Nav.Link style={algoStyle}>Bubble Sort</Nav.Link>
+            <Nav.Link onClick= {() => props.bubbleSort()} style={algoStyle}>Bubble Sort</Nav.Link>
             <Nav.Link style={algoStyle}>Selection Sort</Nav.Link>
                   </Col>
               </Row>

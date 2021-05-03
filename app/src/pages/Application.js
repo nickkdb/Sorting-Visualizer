@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import "../styles/array.css";
-import { getDivs } from "../components/algo";
+import { startBubble } from "../components/bubble";
 
 function Application() {
 
     const [array, setArray] = useState([]);
-    const [iterations, setIterator] = useState(0);
-    const [position, setPosition] = useState(0);
 
     useEffect(() => {
         generateArr();
@@ -20,7 +18,6 @@ function Application() {
             tempArr.push(randomInt(25, 1000));
         }
         setArray(tempArr);
-        getDivs();
     }
     const randomInt= (min, max) => {
         return Math.floor(Math.random() * (max - min + 1) + min);
@@ -28,6 +25,10 @@ function Application() {
 
     const setWidth= (num) => {
         return (Math.floor(num / 25)) + 50;
+    }
+
+    const bubbleSort= () => {
+        startBubble();
     }
 
     let unsorted = array.map((element, index) => {
@@ -40,7 +41,7 @@ function Application() {
 
     return (
         <>
-        <Header reset= {generateArr} array={array} />
+        <Header reset= {generateArr} array={array} bubbleSort= {bubbleSort}/>
         <div id="container">
             {unsorted}
         </div>
