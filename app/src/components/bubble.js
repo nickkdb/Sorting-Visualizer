@@ -38,7 +38,7 @@ const runLoop= (timeStamp) => {
                 updateArray();
                 break;
             case "finished":
-                setToBlue();
+                setToPink();
         }
     }
 }
@@ -67,7 +67,7 @@ function updateArray() {
     stage= "finished";
 }
 
-function setToBlue() {
+function setToPink() {
     divs[position].style.backgroundColor= "rgb(247, 144, 161)";
     divs[position+1].style.backgroundColor= "rgb(247, 144, 161)";
 
