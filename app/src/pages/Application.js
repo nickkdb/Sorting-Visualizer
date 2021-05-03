@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import "../styles/array.css";
 import { startBubble } from "../components/bubble";
 import { setWidth } from "../utils/width";
+import { startSelection } from "../components/selection";
 
 function Application() {
 
@@ -28,6 +29,10 @@ function Application() {
         startBubble(array);
     }
 
+    const selectionSort= () => {
+        startSelection(array);
+    }
+
     let unsorted = array.map((element, index) => {
         let num= setWidth(element);
         return (
@@ -38,7 +43,13 @@ function Application() {
 
     return (
         <>
-        <Header reset= {generateArr} array={array} bubbleSort= {bubbleSort}/>
+        <Header 
+        reset= {generateArr} 
+        array={array} 
+        bubbleSort= {bubbleSort}
+        selectionSort= {selectionSort}
+        />
+
         <div id="container">
             {unsorted}
         </div>
