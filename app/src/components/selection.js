@@ -19,9 +19,30 @@ requestAnimationFrame(runLoop);
 }
 
 const runLoop= (timeStamp) => {
-    requestAnimationFrame(runLoop);
-    let timeTilRender= (timeStamp - lastRender) / 1000;
-    if (timeTilRender < 1 / SPEED) return;
-    lastRender= timeStamp;
-    console.log('rendering!');
+    while (startingIndex < array.length - 1) {
+        requestAnimationFrame(runLoop);
+        let timeTilRender= (timeStamp - lastRender) / 1000;
+        if (timeTilRender < 1 / SPEED) return;
+        lastRender= timeStamp;
+        console.log('rendering!');
+        smallest= null;
+        indexOfSmallest= null;
+    
+        update();
+    }
+}
+
+function update() {
+    for (let i = startingIndex; i < array.length; i++) {
+        if (smallest== null || array[i] < smallest) {
+            smallest= array[i];
+            indexOfSmallest= i;
+        }
+    }
+
+    let temp = array[startingIndex];
+    array[startingIndex] = array[indexOfSmallest];
+    array[indexOfSmallest] = temp;
+    startingIndex++;
+    console.log(array);
 }
