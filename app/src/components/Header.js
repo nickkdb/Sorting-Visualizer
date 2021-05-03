@@ -1,7 +1,7 @@
 import React from "react";
 import {Nav, Navbar, Row, Col} from 'react-bootstrap';
 
-function Header() {
+function Header(props) {
 
     const style= {
         fontFamily: "Courier New",
@@ -21,7 +21,7 @@ function Header() {
           <Nav style={{width: "100%"}}>
               <Row style={{width: "100%", textAlign: 'center'}}>
                   <Col xl={4}>
-            <Nav.Link style={style}>Generate New Array</Nav.Link>
+            <Nav.Link onClick={() => props.reset()} style={style}>Generate New Array</Nav.Link>
                   </Col>
                   <Col xl={4}>
             <Nav.Link style={style}>Sorting Speed</Nav.Link>

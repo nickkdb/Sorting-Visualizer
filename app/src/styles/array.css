@@ -1,0 +1,20 @@
+.array {
+    /* height: 2px;
+    background-color: pink;
+    display: inline-block;
+    margin: 1px 0; */
+    font: 10px sans-serif;
+    background-color: rgb(247, 144, 161);
+    text-align: right;
+    padding: 10px;
+    margin: 5px;
+    color: white;
+}
+
+.container {
+    height: fit-content;
+    /* position: absolute;
+    top: 15vh; */
+    margin-left: 0;
+    margin-top: 1vh
+}
