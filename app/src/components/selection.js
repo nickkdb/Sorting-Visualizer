@@ -1,48 +1,67 @@
 import {setWidth } from "../utils/width";
 
-const SPEED= 5;
-let array;
+const SPEED= 500;
 let divs;
-let lastRender;
-let smallest;
-let indexOfSmallest;
-let startingIndex;
+let array;
+
+const delay= ms => new Promise(res => setTimeout(res, ms));
+
+const changeColor= (idx, color) => {
+    divs[idx].style.backgroundColor= color;
+}
+
+const runSelection= async () => {
+
+    for (let i = 0; i < array.length; i++) {
+        let smallest= null;
+        let smallestIdx= null;
+
+        for (let j = i; j < array.length; j++) {
+            changeColor(j, "darkviolet");
+            await delay(SPEED);
+
+            if (smallest == null || smallest > array[j]) {
+
+                if (smallest !== null) changeColor(smallestIdx, "rgb(247, 144, 161)");
+                changeColor(j, "orange");
+                await delay(SPEED);
+
+                smallest= array[j];
+                smallestIdx= j;
+            } else {
+                changeColor(j, "rgb(247, 144, 161)");
+            }
+        }
+
+        changeColor(smallestIdx, "red");
+        changeColor(i, "red");
+        await delay(SPEED);
+
+        array[smallestIdx]= array[i];
+
+        let width1= setWidth(array[i]);
+        divs[smallestIdx].style.width= `${width1}vmin`;
+
+        array[i] = smallest;
+
+        let width2= setWidth(smallest);
+        divs[i].style.width= `${width2}vmin`;
+
+        await delay(SPEED);
+
+        changeColor(smallestIdx, "rgb(247, 144, 161)");
+        changeColor(i, "rgb(247, 144, 161)");
+
+        await delay(SPEED);
+    }
+}
 
 
 export const startSelection= (input) => {
-lastRender= 0;
-divs= document.getElementById('container').querySelectorAll('array');
-array= input;
-smallest= null;
-startingIndex= 0;
-requestAnimationFrame(runLoop);
+    array= input;
+    divs= document.getElementById('container').querySelectorAll('.array');
+    runSelection();
 }
 
-const runLoop= (timeStamp) => {
-    while (startingIndex < array.length - 1) {
-        requestAnimationFrame(runLoop);
-        let timeTilRender= (timeStamp - lastRender) / 1000;
-        if (timeTilRender < 1 / SPEED) return;
-        lastRender= timeStamp;
-        console.log('rendering!');
-        smallest= null;
-        indexOfSmallest= null;
-    
-        update();
-    }
-}
 
-function update() {
-    for (let i = startingIndex; i < array.length; i++) {
-        if (smallest== null || array[i] < smallest) {
-            smallest= array[i];
-            indexOfSmallest= i;
-        }
-    }
 
-    let temp = array[startingIndex];
-    array[startingIndex] = array[indexOfSmallest];
-    array[indexOfSmallest] = temp;
-    startingIndex++;
-    console.log(array);
-}
