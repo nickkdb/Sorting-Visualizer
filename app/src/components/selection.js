@@ -1,5 +1,3 @@
-import {setWidth } from "../utils/width";
-
 const SPEED= 200;
 let divs;
 let array;
@@ -8,6 +6,11 @@ const delay= ms => new Promise(res => setTimeout(res, ms));
 
 const changeColor= (idx, color) => {
     divs[idx].style.backgroundColor= color;
+}
+
+const setWidth= (idx, width) => {
+    let num= ((Math.floor(width / 25)) + 50);
+    divs[idx].style.width= `${num}vmin`;
 }
 
 const runSelection= async () => {
@@ -38,14 +41,11 @@ const runSelection= async () => {
         await delay(SPEED);
 
         array[smallestIdx]= array[i];
+        setWidth(smallestIdx, array[i]);
 
-        let width1= setWidth(array[i]);
-        divs[smallestIdx].style.width= `${width1}vmin`;
 
         array[i] = smallest;
-
-        let width2= setWidth(smallest);
-        divs[i].style.width= `${width2}vmin`;
+        setWidth(i, smallest);
 
         await delay(SPEED);
 
