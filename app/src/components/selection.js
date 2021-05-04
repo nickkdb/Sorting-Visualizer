@@ -1,6 +1,6 @@
 import {setWidth } from "../utils/width";
 
-const SPEED= 500;
+const SPEED= 200;
 let divs;
 let array;
 
@@ -23,7 +23,7 @@ const runSelection= async () => {
             if (smallest == null || smallest > array[j]) {
 
                 if (smallest !== null) changeColor(smallestIdx, "rgb(247, 144, 161)");
-                changeColor(j, "orange");
+                changeColor(j, "limegreen");
                 await delay(SPEED);
 
                 smallest= array[j];
