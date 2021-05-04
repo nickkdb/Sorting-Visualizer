@@ -1,82 +1,60 @@
-import { setWidth } from "../utils/width";
-
-const SPEED= 5;
-let lastRender;
-let position;
+const SPEED= 200;
 let array;
 let divs;
-let stage;
 let swaps;
 let madeSwaps;
 
+const delay= ms => new Promise(res => setTimeout(res, ms));
+
+const changeColor= (idx, color) => {
+    divs[idx].style.backgroundColor= color;
+}
+
+const setWidth= (idx, width) => {
+    let num= ((Math.floor(width / 25)) + 50);
+    divs[idx].style.width= `${num}vmin`;
+}
+
+const runBubble= async () => {
+    for (let i = 0; i < array.length; i++) {
+        if (madeSwaps== false) break;
+
+        for (let j = 0; j < array.length - 1; j++) {
+
+            changeColor(j, "darkviolet");
+            changeColor(j+1, "darkviolet");
+            await delay(SPEED);
+
+            if (array[j] > array[j+1]) {
+                changeColor(j, "red");
+                changeColor(j+1, "red");
+
+                await delay(SPEED);
+
+                let temp= array[j];
+                array[j]= array[j+1];
+                setWidth(j, array[j+1]);
+
+                array[j+1]= temp;
+                setWidth(j+1, temp);
+                swaps++;
+
+                await delay(SPEED);             
+            }
+            changeColor(j, "rgb(247, 144, 161)");
+            changeColor(j+1, "rgb(247, 144, 161)");
+        }
+        (swaps > 0 ? swaps= 0 : madeSwaps= false);
+    }
+}
+
 
 export const startBubble= (input) => {
-    lastRender= 0;
-    position= 0;
-    array= input;
-    divs= document.getElementById('container').querySelectorAll('.array');
-    stage= "pink";
-    swaps= 0;
-    madeSwaps= true;
-    requestAnimationFrame(runLoop);
+   array= input;
+   divs= document.getElementById('container').querySelectorAll(".array");
+   swaps= 0;
+   madeSwaps= true;
+
+    runBubble();
 }
 
-const runLoop= (timeStamp) => {
-
-    while (madeSwaps) {
-        requestAnimationFrame(runLoop);
-        let timeTilRender= (timeStamp - lastRender) / 1000;
-        if (timeTilRender < 1/ SPEED) return;
-        lastRender= timeStamp;
-        console.log('rendering!');
-
-        switch(stage) {
-            case "pink":
-                setColor();
-                break;
-            case "violet":
-                updateArray();
-                break;
-            case "finished":
-                setToPink();
-        }
-    }
-}
-
-function setColor() {
-    divs[position].style.backgroundColor= "darkviolet";
-    divs[position+1].style.backgroundColor= "darkviolet";
-    stage= "violet";
-}
-
-function updateArray() {
-
-    if (array[position] > array[position + 1]) {
-        divs[position].style.backgroundColor= "red";
-        divs[position+1].style.backgroundColor= "red";
-        let temp= array[position];
-        array[position] = array[position+1];
-        let width1= setWidth(array[position+1]);
-        divs[position].style.width= `${width1}vmin`;
-        array[position+1]= temp;
-        let width2= setWidth(temp);
-        divs[position+1].style.width = `${width2}vmin`;
-        swaps++;
-    }
-
-    stage= "finished";
-}
-
-function setToPink() {
-    divs[position].style.backgroundColor= "rgb(247, 144, 161)";
-    divs[position+1].style.backgroundColor= "rgb(247, 144, 161)";
-
-    stage= "pink";
-
-    if (position + 1 === array.length - 1) {
-        (swaps > 0 ? swaps = 0 : madeSwaps= false);
-        position= 0;
-    } else {
-        position++;
-    }
-}
