@@ -64,7 +64,7 @@ const runSelection= async () => {
 export const startSelection= (inputArray, speed) => {
     array= inputArray;
     SPEED= speed;
-    divs= document.getElementById('container').querySelectorAll('.array');
+    divs= document.getElementsByClassName('array');
     runSelection();
 }
 

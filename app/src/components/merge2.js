@@ -1,49 +1,77 @@
-let array= [30, 20, 10, 50, 22, 33, 55];
-
-const mergeSort= (arr) => {
-    let sorted= Array.from(arr);
-
-    let len= sorted.length;
-    let buffer= new Array(len);
-
-    for (let size= 1; size < len; size *= 2) {
-        for (let leftStart= 0; leftStart < len; leftStart += 2*size) {
-            
-            let left= leftStart;
-            let right= Math.min(left + size, len);
-            let leftLimit= right;
-            let rightLimit = Math.min(right + size, len);
-
-            merge(left, right, leftLimit, rightLimit, sorted, buffer);
-        }
-
-        let temp = sorted;
-        sorted= buffer;
-        buffer= temp;
-    }
-
-    return sorted;
+export function getAnimations(arr) {
+const animations= []; //array to hold indexes of what to animate
+if (arr.length <= 1) return arr;
+const copyArray= arr.slice();
+mergeSortHelper(arr, 0, arr.length - 1, copyArray, animations);
+return animations; //returns animations array after indices are pushed
 }
 
-function merge(left, right, leftLimit, rightLimit, sorted, buffer) {
+function mergeSortHelper(mainArr, startIdx, endIdx, copyArr, animations) { // can't use sliced arrays because original index is needed
+if (startIdx === endIdx) return;
+const middleIdx= Math.floor((startIdx + endIdx) / 2);
+mergeSortHelper(copyArr, startIdx, middleIdx, mainArr, animations);
+mergeSortHelper(copyArr, middleIdx + 1, endIdx, mainArr, animations);
+doMerge(mainArr, startIdx, middleIdx, endIdx, copyArr, animations);
+}
 
-    let i = left;
+function doMerge(mainArr, startIdx, middleIdx, endIdx, copyArr, animations) {
 
-    while ( left < leftLimit && right < rightLimit) {
-        if (sorted[left] <= sorted[right]) {
-            buffer[i++] = sorted[left++];
-        } else {
-            buffer[i++] = sorted[right++];
-        }
-    }
+    let idxOfSmaller= startIdx;
+    let leftBound= startIdx;
+    let rightBound = middleIdx + 1;
 
-    while (left < leftLimit) {
-        buffer[i++] = sorted[left++];
-    }
+    //equivalent of while left.length & right.length in traditional merge sort
+    while ( leftBound <= middleIdx && rightBound <= endIdx) {
+        
+        //push the index for animations
+        animations.push([leftBound, rightBound]);
+
+        animations.push([leftBound, rightBound]);
+
+        // equal to "if left[0] < right[0]"
+        if (copyArr[leftBound] <= copyArr[rightBound]) { 
     
-    while (right < rightLimit) {
-        buffer[i++] = sorted[right++];
+            //push index of left bound and value at left bound
+            animations.push([idxOfSmaller, copyArr[leftBound]]); 
+
+            //push left bound into smaller index, then increment
+            mainArr[idxOfSmaller++]= copyArr[leftBound++];
+
+        } else {
+
+            //push index of right bound and value at right bound
+            animations.push([idxOfSmaller, copyArr[rightBound]]); 
+
+            //push right bound into smaller index, then increment
+            mainArr[idxOfSmaller++]= copyArr[rightBound++];
+        }
+    }
+
+    //pushing remaining left bound elements, equivalent of "...left"
+    while (leftBound <= middleIdx) { 
+
+        //push twice for animations
+        animations.push([leftBound,leftBound]);
+        animations.push([leftBound,leftBound]);
+
+        //index and value of left bound
+        animations.push([idxOfSmaller, copyArr[leftBound]]);
+
+        //add to array, increment for next iteration
+        mainArr[idxOfSmaller++]= copyArr[leftBound++];
+    }
+
+    //pushing remaining right bound elements, "...right"
+    while (rightBound <= endIdx) { 
+
+        //push twice for animations
+        animations.push([rightBound,rightBound]);
+        animations.push([rightBound,rightBound]);
+
+        //index and value of right bound
+        animations.push([idxOfSmaller, copyArr[rightBound]]);
+
+        //add to array, increment for next iteration
+        mainArr[idxOfSmaller++]= copyArr[rightBound++];
     }
 }
-
-console.log(mergeSort(array));

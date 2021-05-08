@@ -52,7 +52,7 @@ const runBubble= async () => {
 export const startBubble= (inputArray, speed) => {
    array= inputArray;
    SPEED= speed;
-   divs= document.getElementById('container').querySelectorAll(".array");
+   divs= document.getElementsByClassName("array");
    swaps= 0;
    madeSwaps= true;
 
