@@ -1,4 +1,4 @@
-const SPEED= 200;
+let SPEED;
 let divs;
 let array;
 
@@ -15,7 +15,7 @@ const setWidth= (idx, width) => {
 
 const runSelection= async () => {
 
-    for (let i = 0; i < array.length; i++) {
+    for (let i = 0; i < array.length - 1; i++) {
         let smallest= null;
         let smallestIdx= null;
 
@@ -36,18 +36,22 @@ const runSelection= async () => {
             }
         }
 
-        changeColor(smallestIdx, "red");
-        changeColor(i, "red");
-        await delay(SPEED);
+        if (smallestIdx !== i) {
+            changeColor(smallestIdx, "red");
+            changeColor(i, "red");
+            await delay(SPEED);
+    
+            array[smallestIdx]= array[i];
+            setWidth(smallestIdx, array[i]);
+    
+    
+            array[i] = smallest;
+            setWidth(i, smallest);
+    
+            await delay(SPEED);
 
-        array[smallestIdx]= array[i];
-        setWidth(smallestIdx, array[i]);
+        }
 
-
-        array[i] = smallest;
-        setWidth(i, smallest);
-
-        await delay(SPEED);
 
         changeColor(smallestIdx, "rgb(247, 144, 161)");
         changeColor(i, "rgb(247, 144, 161)");
@@ -57,8 +61,9 @@ const runSelection= async () => {
 }
 
 
-export const startSelection= (input) => {
-    array= input;
+export const startSelection= (inputArray, speed) => {
+    array= inputArray;
+    SPEED= speed;
     divs= document.getElementById('container').querySelectorAll('.array');
     runSelection();
 }

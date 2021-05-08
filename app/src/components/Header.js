@@ -1,7 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import {Nav, Navbar, Row, Col} from 'react-bootstrap';
 
 function Header(props) {
+
+  const [sliderVal, setSlider] = useState(200);
+
+  const handleSlide= (event) => {
+    setSlider(event.target.value);
+  }
 
     const style= {
         fontFamily: "Courier New",
@@ -25,11 +31,18 @@ function Header(props) {
                   </Col>
                   <Col xl={4}>
             <Nav.Link style={style}>Sorting Speed</Nav.Link>
+            <input 
+            id="slider" 
+            type="range" 
+            min="50" max="500"
+            value={sliderVal}
+            onChange={(event) => handleSlide(event)}
+            />
                   </Col>
                   <Col xl={4} style={{display: "grid", gridTemplateColumns: "repeat(3, 1fr)"}}>
-            <Nav.Link style={algoStyle}>Merge Sort</Nav.Link>
-            <Nav.Link onClick= {() => props.bubbleSort()} style={algoStyle}>Bubble Sort</Nav.Link>
-            <Nav.Link onClick= {() => props.selectionSort()} style={algoStyle}>Selection Sort</Nav.Link>
+            <Nav.Link onClick={() => props.mergeSort()} style={algoStyle}>Merge Sort</Nav.Link>
+            <Nav.Link onClick= {() => props.bubbleSort(sliderVal)} style={algoStyle}>Bubble Sort</Nav.Link>
+            <Nav.Link onClick= {() => props.selectionSort(sliderVal)} style={algoStyle}>Selection Sort</Nav.Link>
                   </Col>
               </Row>
           </Nav>

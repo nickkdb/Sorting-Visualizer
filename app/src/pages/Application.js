@@ -4,6 +4,7 @@ import "../styles/array.css";
 import { startBubble } from "../components/bubble";
 import { setWidth } from "../utils/width";
 import { startSelection } from "../components/selection";
+import { startMerge } from "../components/merge2";
 
 function Application() {
 
@@ -25,12 +26,16 @@ function Application() {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
-    const bubbleSort= () => {
-        startBubble(array);
+    const bubbleSort= (speed) => {
+        startBubble(array, speed);
     }
 
-    const selectionSort= () => {
-        startSelection(array);
+    const selectionSort= (speed) => {
+        startSelection(array, speed);
+    }
+
+    const mergeSort= () => {
+        startMerge(array);
     }
 
     let unsorted = array.map((element, index) => {
@@ -48,6 +53,7 @@ function Application() {
         array={array} 
         bubbleSort= {bubbleSort}
         selectionSort= {selectionSort}
+        mergeSort= {mergeSort}
         />
 
         <div id="container">

@@ -1,4 +1,4 @@
-const SPEED= 200;
+let SPEED;
 let array;
 let divs;
 let swaps;
@@ -49,8 +49,9 @@ const runBubble= async () => {
 }
 
 
-export const startBubble= (input) => {
-   array= input;
+export const startBubble= (inputArray, speed) => {
+   array= inputArray;
+   SPEED= speed;
    divs= document.getElementById('container').querySelectorAll(".array");
    swaps= 0;
    madeSwaps= true;
