@@ -21,7 +21,7 @@ function Header(props) {
     }
 
     return (
-        <Navbar className="py-4" style={{backgroundColor: "steelblue"}} collapseOnSelect expand="lg" variant="dark">
+        <Navbar className="py-4" style={{backgroundColor: "steelblue", marginBottom: "1.5rem"}} collapseOnSelect expand="lg" variant="dark">
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav style={{width: "100%"}}>
@@ -30,9 +30,10 @@ function Header(props) {
             <Nav.Link onClick={() => props.reset()} style={style}>Generate New Array</Nav.Link>
                   </Col>
                   <Col xl={4}>
-            <Nav.Link style={style}>Sorting Speed</Nav.Link>
+            <Nav.Item style={style}>Sorting Speed</Nav.Item>
             <input 
             id="slider" 
+            style={{width: "10rem"}}
             type="range" 
             min="50" max="500"
             value={sliderVal}

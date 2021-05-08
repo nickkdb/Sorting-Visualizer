@@ -11,7 +11,7 @@ const changeColor= (idx, color) => {
 }
 
 const setWidth= (idx, width) => {
-    let num= ((Math.floor(width / 25)) + 50);
+    let num= ((Math.floor(width / 15)) + 20);
     divs[idx].style.width= `${num}vmin`;
 }
 
