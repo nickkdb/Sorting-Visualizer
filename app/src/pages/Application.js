@@ -65,7 +65,6 @@ function Application() {
         } else {
             setActive(true);
         }
-        // let adjustedSpeed= (speed * 3) / 4;
 
         let obj= {
             desc: "Selection sort keeps track of the smallest element on every iteration, and swaps that element into its position. Each iteration will result in the smallest number reaching its correct position.",
