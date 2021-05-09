@@ -12,6 +12,7 @@ function Application() {
 
     const [array, setArray] = useState([]);
     const [legend, setLegend]= useState(null);
+    const [isActive, setActive] = useState(false);
 
     useEffect(() => {
         generateArr();
@@ -34,7 +35,12 @@ function Application() {
     }
 
     const bubbleSort= (speed) => {
-
+        speed= (speed * 3) / 4;
+        if (isActive) {
+            return;
+        } else {
+            setActive(true);
+        }
         let obj= {
             desc: "Bubble sort swaps an element until it reaches a larger element, and then continues that process for the rest of the iteration. Each iteration will result in the largest number reaching its correct position.",
             bestcase: "O(n)",
@@ -48,11 +54,18 @@ function Application() {
         }
         setLegend(obj);
 
-        startBubble(array, speed);
+        startBubble(array, speed, () => {
+            setActive(false);
+        });
     }
 
     const selectionSort= (speed) => {
-        let adjustedSpeed= (speed * 3) / 4;
+        if (isActive) {
+            return;
+        } else {
+            setActive(true);
+        }
+        // let adjustedSpeed= (speed * 3) / 4;
 
         let obj= {
             desc: "Selection sort keeps track of the smallest element on every iteration, and swaps that element into its position. Each iteration will result in the smallest number reaching its correct position.",
@@ -67,12 +80,20 @@ function Application() {
             )
         }
         setLegend(obj);
-        startSelection(array, adjustedSpeed);
+        startSelection(array, speed, () => {
+            setActive(false);
+        });
     }
 
-    const mergeSort= async (sp) => {
+    const mergeSort= async (speed) => {
+        if (isActive) {
+            return;
+        } else {
+            setActive(true);
+        }
         console.log(legend);
-        let speed= (sp * 3) / 4;
+        if (speed < 15 ) speed = 15;
+        if (speed > 49) speed = 60;
         let obj= {
             desc: "Merge sort divides the array into halves until it reaches one, then it sorts the pieces, and combines the array back together",
             bestcase: "O(nLogn)",
@@ -87,7 +108,9 @@ function Application() {
         setLegend(obj);
 
         let res= getAnimations(array);
-        startAnimation(res[0], res[1], speed); 
+        startAnimation(res[0], res[1], speed, () => {
+            setActive(false);
+        });  
     }
 
     let unsorted = array.map((element, index) => {
@@ -106,6 +129,7 @@ function Application() {
         bubbleSort= {bubbleSort}
         selectionSort= {selectionSort}
         mergeSort= {mergeSort}
+        active= {isActive}
         />
     <div id="grid">
         <div id="container" style={{width: "50%"}}>

@@ -49,13 +49,14 @@ const runBubble= async () => {
 }
 
 
-export const startBubble= (inputArray, speed) => {
+export const startBubble= async(inputArray, speed, cb) => {
    array= inputArray;
    SPEED= speed;
    divs= document.getElementsByClassName("array");
    swaps= 0;
    madeSwaps= true;
 
-    runBubble();
+    await runBubble();
+    cb();
 }
 

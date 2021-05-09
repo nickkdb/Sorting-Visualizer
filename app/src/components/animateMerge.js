@@ -42,11 +42,13 @@ const runAnimation= async() => {
     }
 }
 
-export const startAnimation= (val, index, speed) => {
+export const startAnimation= async (val, index, speed, cb) => {
 divs= document.getElementsByClassName('array');
 values= val;
 indices= index;
 SPEED= speed;
+console.log(SPEED);
 
-runAnimation();
+await runAnimation();
+cb()
 }

@@ -1,11 +1,13 @@
 import React, {useState} from "react";
 import {Nav, Navbar, Row, Col} from 'react-bootstrap';
+import "../styles/header.css";
 
 function Header(props) {
 
-  const [sliderVal, setSlider] = useState(200);
+  const [sliderVal, setSlider] = useState(25);
 
   const handleSlide= (event) => {
+    console.log(event.target.value);
     setSlider(event.target.value);
   }
 
@@ -27,23 +29,23 @@ function Header(props) {
           <Nav style={{width: "100%"}}>
               <Row style={{width: "100%", textAlign: 'center'}}>
                   <Col xl={4}>
-            <Nav.Link onClick={() => props.reset()} style={style}>Generate New Array</Nav.Link>
+            <Nav.Link className={!props.active ? "enabled" : "disabled"} onClick={!props.active ? () => props.reset() : null} style={style}>Generate New Array</Nav.Link>
                   </Col>
                   <Col xl={4}>
-            <Nav.Item style={style}>Sorting Speed</Nav.Item>
+            <Nav.Item style={style}>Sorting Speed <br/> (lower = faster)</Nav.Item>
             <input 
             id="slider" 
             style={{width: "10rem"}}
             type="range" 
-            min="20" max="300"
+            min="10" max="50"
             value={sliderVal}
             onChange={(event) => handleSlide(event)}
             />
                   </Col>
                   <Col xl={4} style={{display: "grid", gridTemplateColumns: "repeat(3, 1fr)"}}>
-            <Nav.Link onClick={() => props.mergeSort(sliderVal)} style={algoStyle}>Merge Sort</Nav.Link>
-            <Nav.Link onClick= {() => props.bubbleSort(sliderVal)} style={algoStyle}>Bubble Sort</Nav.Link>
-            <Nav.Link onClick= {() => props.selectionSort(sliderVal)} style={algoStyle}>Selection Sort</Nav.Link>
+            <Nav.Link className={!props.active ? "enabled" : "disabled"} onClick={() => props.mergeSort(sliderVal)} style={algoStyle}>Merge Sort</Nav.Link>
+            <Nav.Link className={!props.active ? "enabled" : "disabled"} onClick= {() => props.bubbleSort(sliderVal)} style={algoStyle}>Bubble Sort</Nav.Link>
+            <Nav.Link className={!props.active ? "enabled" : "disabled"} onClick= {() => props.selectionSort(sliderVal)} style={algoStyle}>Selection Sort</Nav.Link>
                   </Col>
               </Row>
           </Nav>

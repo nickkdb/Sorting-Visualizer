@@ -61,11 +61,12 @@ const runSelection= async () => {
 }
 
 
-export const startSelection= (inputArray, speed) => {
+export const startSelection= async(inputArray, speed, cb) => {
     array= inputArray;
     SPEED= speed;
     divs= document.getElementsByClassName('array');
-    runSelection();
+    await runSelection();
+    cb();
 }
 
 

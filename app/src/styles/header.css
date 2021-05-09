@@ -1,0 +1,8 @@
+.enabled {
+    color: rgb(176, 224, 230);
+}
+
+.disabled {
+    color: darkred !important;
+    cursor: none;
+}
