@@ -7,7 +7,6 @@ function Header(props) {
 
   const handleSlide= (event) => {
     setSlider(event.target.value);
-    // props.changeSize(event.target.value);
   }
 
     const style= {

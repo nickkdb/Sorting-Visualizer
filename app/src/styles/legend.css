@@ -1,0 +1,15 @@
+.text {
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+strong {
+    font-size: 1.75rem;
+}
+h3 {
+    font-weight: bold;
+}
+span {
+    font-weight: 400;
+}
