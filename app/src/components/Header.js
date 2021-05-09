@@ -7,6 +7,7 @@ function Header(props) {
 
   const handleSlide= (event) => {
     setSlider(event.target.value);
+    // props.changeSize(event.target.value);
   }
 
     const style= {
@@ -35,7 +36,7 @@ function Header(props) {
             id="slider" 
             style={{width: "10rem"}}
             type="range" 
-            min="50" max="500"
+            min="20" max="500"
             value={sliderVal}
             onChange={(event) => handleSlide(event)}
             />
