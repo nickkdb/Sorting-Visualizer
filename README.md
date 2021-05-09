@@ -1,6 +1,4 @@
 # Sorting Visualizer
-
-https://playsnakejs.herokuapp.com/
     
 ## Table of Contents
 - [Description](#Description)
