@@ -19,7 +19,7 @@ const runBubble= async () => {
     for (let i = 0; i < array.length; i++) {
         if (madeSwaps== false) break;
 
-        for (let j = 0; j < array.length - 1; j++) {
+        for (let j = 0; j < (array.length - i - 1); j++) {
 
             changeColor(j, "darkviolet");
             changeColor(j+1, "darkviolet");

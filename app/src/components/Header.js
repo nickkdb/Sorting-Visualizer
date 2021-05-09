@@ -36,7 +36,7 @@ function Header(props) {
             id="slider" 
             style={{width: "10rem"}}
             type="range" 
-            min="20" max="500"
+            min="20" max="300"
             value={sliderVal}
             onChange={(event) => handleSlide(event)}
             />

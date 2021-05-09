@@ -10,7 +10,6 @@ import { startAnimation } from "../components/animateMerge";
 function Application() {
 
     const [array, setArray] = useState([]);
-    // const [arraySize, setSize] = useState(25);
 
     useEffect(() => {
         generateArr();
@@ -19,7 +18,7 @@ function Application() {
     const generateArr= () => {
         let tempArr= [];
 
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 50; i++) {
             let num;
             do {
                 num= randomInt(25, 1000);
