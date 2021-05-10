@@ -23,6 +23,14 @@
 
 #legend {
     border: 2px solid black;
-    height: 80%;
+    height: fit-content;
     margin-right: 5px;
+}
+
+@media (max-width: 999px) {
+   #grid {
+       height: 90vh;
+       grid-template-columns: none;
+       grid-template-rows: 60%;
+   }
 }

@@ -23,11 +23,11 @@ function Header(props) {
     }
 
     return (
-        <Navbar className="py-4" style={{backgroundColor: "steelblue", marginBottom: "1.5rem"}} collapseOnSelect expand="lg" variant="dark">
+        <Navbar className="py-4 toolbar" collapseOnSelect expand="lg" variant="dark">
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav style={{width: "100%"}}>
-              <Row style={{width: "100%", textAlign: 'center'}}>
+          <Nav id="btn-nav" style={{width: "100%"}}>
+              <Row id="btn-row">
                   <Col xl={4}>
             <Nav.Link className={!props.active ? "enabled" : "disabled"} onClick={!props.active ? () => props.reset() : null} style={style}>Generate New Array</Nav.Link>
                   </Col>
@@ -42,7 +42,7 @@ function Header(props) {
             onChange={(event) => handleSlide(event)}
             />
                   </Col>
-                  <Col xl={4} style={{display: "grid", gridTemplateColumns: "repeat(3, 1fr)"}}>
+                  <Col xl={4} id="algoTypes-col">
             <Nav.Link className={!props.active ? "enabled" : "disabled"} onClick={() => props.mergeSort(sliderVal)} style={algoStyle}>Merge Sort</Nav.Link>
             <Nav.Link className={!props.active ? "enabled" : "disabled"} onClick= {() => props.bubbleSort(sliderVal)} style={algoStyle}>Bubble Sort</Nav.Link>
             <Nav.Link className={!props.active ? "enabled" : "disabled"} onClick= {() => props.selectionSort(sliderVal)} style={algoStyle}>Selection Sort</Nav.Link>

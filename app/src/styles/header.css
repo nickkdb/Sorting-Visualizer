@@ -6,3 +6,24 @@
     color: darkred !important;
     cursor: none;
 }
+.toolbar {
+    background-color: steelblue;
+    margin-bottom: 1.5rem;
+}
+#btn-nav {
+    width: 100%;
+}
+#btn-row {
+    width: 100%;
+    text-align: center;
+}
+#algoTypes-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 999px) {
+    .toolbar {
+        margin-bottom: 0;
+    }
+}
