@@ -84,7 +84,7 @@ function Application() {
         });
     }
 
-    const mergeSort= async (speed) => {
+    const mergeSort= (speed) => {
         if (isActive) {
             return;
         } else {

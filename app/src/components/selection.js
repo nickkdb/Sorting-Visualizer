@@ -1,17 +1,8 @@
+import { changeColor, changeWidth, delay } from "../utils/functions";
+
 let SPEED;
 let divs;
 let array;
-
-const delay= ms => new Promise(res => setTimeout(res, ms));
-
-const changeColor= (idx, color) => {
-    divs[idx].style.backgroundColor= color;
-}
-
-const setWidth= (idx, width) => {
-    let num= ((Math.floor(width / 15)) + 20);
-    divs[idx].style.width= `${num}vmin`;
-}
 
 const runSelection= async () => {
 
@@ -20,46 +11,45 @@ const runSelection= async () => {
         let smallestIdx= null;
 
         for (let j = i; j < array.length; j++) {
-            changeColor(j, "darkviolet");
+            changeColor(divs, j, "darkviolet");
             await delay(SPEED);
 
             if (smallest == null || smallest > array[j]) {
 
-                if (smallest !== null) changeColor(smallestIdx, "rgb(247, 144, 161)");
-                changeColor(j, "limegreen");
+                if (smallest !== null) changeColor(divs, smallestIdx, "rgb(247, 144, 161)");
+                changeColor(divs, j, "limegreen");
                 await delay(SPEED);
 
                 smallest= array[j];
                 smallestIdx= j;
             } else {
-                changeColor(j, "rgb(247, 144, 161)");
+                changeColor(divs, j, "rgb(247, 144, 161)");
             }
         }
 
         if (smallestIdx !== i) {
-            changeColor(smallestIdx, "red");
-            changeColor(i, "red");
+            changeColor(divs, smallestIdx, "red");
+            changeColor(divs, i, "red");
             await delay(SPEED);
     
             array[smallestIdx]= array[i];
-            setWidth(smallestIdx, array[i]);
+            changeWidth(divs, smallestIdx, array[i]);
     
     
             array[i] = smallest;
-            setWidth(i, smallest);
+            changeWidth(divs, i, smallest);
     
             await delay(SPEED);
 
         }
 
 
-        changeColor(smallestIdx, "rgb(247, 144, 161)");
-        changeColor(i, "rgb(247, 144, 161)");
+        changeColor(divs, smallestIdx, "rgb(247, 144, 161)");
+        changeColor(divs, i, "rgb(247, 144, 161)");
 
         await delay(SPEED);
     }
 }
-
 
 export const startSelection= async(inputArray, speed, cb) => {
     array= inputArray;
