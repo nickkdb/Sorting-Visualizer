@@ -1,51 +1,52 @@
 import { changeColor, changeWidth, delay } from "../utils/functions";
 
 let SPEED;
-let divs;
+let arrayBars;
 let array;
+const pink= "rgb(247, 144, 161)";
 
 const runSelection= async () => {
 
-    for (let i = 0; i < array.length - 1; i++) {
+    for (let currentIdx = 0; currentIdx < array.length - 1; currentIdx++) {
         let smallest= null;
         let smallestIdx= null;
 
-        for (let j = i; j < array.length; j++) {
-            changeColor(divs, j, "darkviolet");
+        for (let idx = currentIdx; idx < array.length; idx++) {
+            changeColor(arrayBars, idx, "darkviolet");
             await delay(SPEED);
 
-            if (smallest == null || smallest > array[j]) {
+            if (smallest == null || smallest > array[idx]) {
 
-                if (smallest !== null) changeColor(divs, smallestIdx, "rgb(247, 144, 161)");
-                changeColor(divs, j, "limegreen");
+                if (smallest !== null) changeColor(arrayBars, smallestIdx, pink);
+                changeColor(arrayBars, idx, "limegreen");
                 await delay(SPEED);
 
-                smallest= array[j];
-                smallestIdx= j;
+                smallest= array[idx];
+                smallestIdx= idx;
             } else {
-                changeColor(divs, j, "rgb(247, 144, 161)");
+                changeColor(arrayBars, idx, pink);
             }
         }
 
-        if (smallestIdx !== i) {
-            changeColor(divs, smallestIdx, "red");
-            changeColor(divs, i, "red");
+        if (smallestIdx !== currentIdx) {
+            changeColor(arrayBars, smallestIdx, "red");
+            changeColor(arrayBars, currentIdx, "red");
             await delay(SPEED);
     
-            array[smallestIdx]= array[i];
-            changeWidth(divs, smallestIdx, array[i]);
+            array[smallestIdx]= array[currentIdx];
+            changeWidth(arrayBars, smallestIdx, array[currentIdx]);
     
     
-            array[i] = smallest;
-            changeWidth(divs, i, smallest);
+            array[currentIdx] = smallest;
+            changeWidth(arrayBars, currentIdx, smallest);
     
             await delay(SPEED);
 
         }
 
 
-        changeColor(divs, smallestIdx, "rgb(247, 144, 161)");
-        changeColor(divs, i, "rgb(247, 144, 161)");
+        changeColor(arrayBars, smallestIdx, pink);
+        changeColor(arrayBars, currentIdx, pink);
 
         await delay(SPEED);
     }
@@ -54,7 +55,7 @@ const runSelection= async () => {
 export const startSelection= async(inputArray, speed, cb) => {
     array= inputArray;
     SPEED= speed;
-    divs= document.getElementsByClassName('array');
+    arrayBars= document.getElementsByClassName('array');
     await runSelection();
     cb();
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import "../styles/array.css";
 import { startBubble } from "../components/bubble";
-import { setWidth } from "../utils/width";
+import { setInitialWidth } from "../utils/functions";
 import { startSelection } from "../components/selection";
 import { getAnimations } from "../components/merge";
 import { startAnimation } from "../components/animateMerge";
@@ -112,8 +112,8 @@ function Application() {
         });  
     }
 
-    let unsorted = array.map((element, index) => {
-        let num= setWidth(element);
+    let initialArray = array.map((element, index) => {
+        let num= setInitialWidth(element);
         return (
             <div className="array" key={index} style={{width: `${num}vmin`}}></div>
         )
@@ -132,7 +132,7 @@ function Application() {
         />
     <div id="grid">
         <div id="container" style={{width: "50%"}}>
-            {unsorted}
+            {initialArray}
         </div>
         <div id="legendbox">
             <div id="legend">

@@ -7,4 +7,8 @@ export const changeWidth= (tag, idx, width) => {
     tag[idx].style.width= `${num}vmin`;
 }
 
+export const setInitialWidth= (num) => {
+    return (Math.floor(num / 15) + 20);
+}
+
 export const delay= ms => new Promise(res => setTimeout(res, ms));
